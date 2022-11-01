@@ -1,15 +1,10 @@
 class Solution {
 public:
-    
-    void zip(const vector<int> &a, const vector<int> &b, vector<pair<int,int>> &zipped) {
-        for(size_t i=0; i<a.size(); ++i){
-            zipped.push_back(std::make_pair(a[i], b[i]));
-        }
-    }
-    
     int earliestFullBloom(vector<int>& plantTime, vector<int>& growTime) {
         vector<pair<int,int>> zipped;
-        zip(plantTime, growTime, zipped);
+        for(size_t i=0; i < plantTime.size(); ++i) {
+            zipped.push_back(make_pair(plantTime[i], growTime[i]));
+        }
 
         sort(zipped.begin(), zipped.end(), [&](const auto& a, const auto& b) {
             return a.second > b.second;

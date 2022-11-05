@@ -13,30 +13,19 @@ class Solution {
 public:
     int maxDepth(TreeNode* root) {
         if (root == NULL) return 0;
-        root->val = 1;
-        int max = 1;
-        stack<TreeNode*> s;
-        s.push(root);
-        while (!s.empty()) {
-            if (s.top()->left == NULL) {
-                if (s.top()->val > max) max = s.top()->val;
-                if (s.top()->right != NULL) {
-                    s.top()->right->val = s.top()->val+1;
-                    TreeNode* temp = s.top()->right;
-                    s.pop();
-                    s.push(temp);
-                }
-                else {
-                    s.pop();
-                }
+        int depth = 0;
+        queue<TreeNode*> q;
+        q.push(root);
+        int n;
+        while (!q.empty()) {
+            n = q.size();
+            for (int i = 0; i < n; i++) {
+                if (q.front()->left) q.push(q.front()->left);
+                if (q.front()->right) q.push(q.front()->right);
+                q.pop();
             }
-            else {
-                s.top()->left->val = s.top()->val+1;
-                TreeNode* temp = s.top()->left;
-                s.top()->left = NULL;
-                s.push(temp);
-            }
+            depth++;
         }
-        return max;
+        return depth;
     }
 };

@@ -1,15 +1,27 @@
 class Solution {
 public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> ans;
-        vector<int> permutation;
-        for (int i = 0; i < nums.size(); i++) {
-            permutation.push_back(nums[i]);
+    
+    int chosen[6]{};
+    vector<int> permutation;
+    vector<vector<int>> ans;
+    
+    void search(vector<int>& nums) {
+        if (permutation.size() == nums.size()) ans.push_back(permutation);
+        else {
+            for (int i = 0; i < nums.size(); i++) {
+                if (!chosen[i]) {
+                    permutation.push_back(nums[i]);
+                    chosen[i] = 1;
+                    search(nums);
+                    permutation.pop_back();
+                    chosen[i] = 0;
+                }
+            }
         }
-        do {
-            ans.push_back(permutation);
-        } while (next_permutation(permutation.begin(),permutation.end()));
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        search(nums);
         return ans;
     }
 };

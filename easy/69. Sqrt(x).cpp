@@ -1,10 +1,11 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        double a = 1;
-        for (int i = 0; i < 20; i++) {
-            a -= (a*a-x)/(2*a);
+        if (x == 0) return 0;
+        int k = 1;
+        for (int b = x/4; b > 0; b /= 2) {
+            while (k + b <= x/2 && (k + b) <= x/(k + b)) k += b;
         }
-        return floor(a);
+        return k;
     }
 };

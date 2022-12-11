@@ -1,15 +1,18 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        map<int, int> m1, m2;
-        for (int i : nums1) m1[i]++;
-        for (int i : nums2) m2[i]++;
+        
+        unordered_map<int, int> m;
         vector<int> ans;
-        for (auto [k, v] : m1) {
-            for (int i = 0; i < min(v, m2[k]); i++) {
-                ans.push_back(k);
+
+        for (int i : nums1) m[i]++;
+        for (int i : nums2) {
+            if (m[i]) {
+                ans.push_back(i);
+                m[i]--;
             }
         }
+
         return ans;
     }
 };

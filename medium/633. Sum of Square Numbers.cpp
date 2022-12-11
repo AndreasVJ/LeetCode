@@ -12,8 +12,6 @@ public:
             while (b <= c/2 - n && (b + n)*(b + n) <= c) b += n;
         }
 
-        printf("%d\n", b);
-
         while (b >= a) {
             prod = a*a + b*b;
             if (prod > c) b--;

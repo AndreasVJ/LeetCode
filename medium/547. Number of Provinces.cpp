@@ -1,6 +1,6 @@
 class UnionFind {
     public:
-        UnionFind(int size) : root(size), rank(size) {
+        UnionFind(int size) : root(size), rank(size), count(size) {
             for (int i = 0; i < size; i++) {
                 root[i] = i;
                 rank[i] = 1;
@@ -28,16 +28,22 @@ class UnionFind {
                     root[rootY] = rootX;
                     rank[rootX]++;
                 }
+                count--;
             }
         }
 
         bool connected(int x, int y) {
             return find(x) == find(y);
         }
+
+        int getCount() {
+            return count;
+        }
     
     private:
         std::vector<int> root;
         std::vector<int> rank;
+        int count;
 };
 
 
@@ -53,12 +59,6 @@ public:
             }
         }
 
-        unordered_set<int> s;
-        
-        for (int i = 0; i < isConnected.size(); i++) {
-            s.insert(uf.find(i));
-        }
-
-        return s.size();
+        return uf.getCount();
     }
 };

@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int top_down(unordered_map<string, int>& memo, vector<int>& nums, vector<int>& multipliers, int left, int i) {
+    int top_down(unordered_map<int, int>& memo, vector<int>& nums, vector<int>& multipliers, int left, int i) {
 
-        string key = to_string(left) + " " + to_string(i);
+        int key = nums.size() * left + i;
         if (memo.find(key) != memo.end()) {
             return memo[key];
         }
@@ -20,7 +20,7 @@ public:
     
     int maximumScore(vector<int>& nums, vector<int>& multipliers) {
         
-        unordered_map<string, int> memo;
+        unordered_map<int, int> memo;
 
         return top_down(memo, nums, multipliers, 0, 0);
     }

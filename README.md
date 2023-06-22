@@ -1,3 +1,4 @@
 # Solutions for problems on [LeetCode](https://leetcode.com/)
 
-All solutions are written in C++
+All algorithms are written in C++  
+Database queries are written in MySQL
